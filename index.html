@@ -5,10 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Enes Yöndeş | Portfolyo</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.8s ease-in-out;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .zoom-hover img {
+      transition: transform 0.5s ease;
+    }
+    .zoom-hover:hover img {
+      transform: scale(1.05);
+    }
+  </style>
 </head>
 <body class="bg-gray-100 text-gray-800 font-sans">
+  
   <!-- Navbar -->
-  <header class="bg-white shadow">
+  <header class="bg-white shadow fixed w-full z-10">
     <div class="container mx-auto px-6 py-4 flex justify-between items-center">
       <h1 class="text-2xl font-bold text-gray-900">Enes Yöndeş</h1>
       <nav class="space-x-4">
@@ -22,73 +40,106 @@
   </header>
 
   <!-- Hero -->
-  <section class="text-center py-12 bg-gray-50">
+  <section class="text-center py-24 bg-gray-50">
     <img src="img/profile.jpg" alt="Enes Yöndeş" class="w-32 h-32 rounded-full mx-auto shadow">
     <h2 class="text-3xl font-bold mt-4">Bilgisayar Mühendisi</h2>
     <p class="text-gray-600 mt-2">Yapay Zeka & Mobil Geliştirme</p>
     <div class="mt-4 space-x-4">
-      <a href="mailto:eneserenyondes@gmail.com" class="text-blue-600">Email</a>
-      <a href="https://github.com/enesyondes" target="_blank" class="text-blue-600">GitHub</a>
-      <a href="https://linkedin.com/in/enesyondes" target="_blank" class="text-blue-600">LinkedIn</a>
+      <a href="mailto:eneserenyondes@gmail.com" class="text-blue-600 hover:underline">Email</a>
+      <a href="https://github.com/enesyondes" target="_blank" class="text-blue-600 hover:underline">GitHub</a>
+      <a href="https://linkedin.com/in/enesyondes" target="_blank" class="text-blue-600 hover:underline">LinkedIn</a>
     </div>
   </section>
 
   <!-- Hakkımda -->
-  <section id="about" class="container mx-auto px-6 py-10">
+  <section id="about" class="container mx-auto px-6 py-10 fade-in">
     <h3 class="text-2xl font-bold mb-4">Hakkımda</h3>
     <p class="text-gray-700 leading-relaxed">
       Ben yeni mezun olan, son derece motive ve tutkulu bir Bilgisayar Mühendisiyim. Son iki yıldır Yapay Zeka alanında kendimi geliştiriyorum.
       Doğal Dil İşleme, Makine Öğrenmesi ve Görüntü İşleme gibi konuları içeren çeşitli projelerde aktif olarak çalıştım. Şu anda Flutter ve Python kullanarak
-      yapay zeka tabanlı mobil uygulama geliştiriyorum. Amacım, dinamik bir çalışma ortamında yeteneklerimi daha da geliştirmek ve profesyonel kariyerime devam etmek.
+      yapay zeka tabanlı mobil uygulama geliştiriyorum.
     </p>
   </section>
 
-  <!-- Eğitim -->
-  <section id="education" class="container mx-auto px-6 py-10 bg-white shadow rounded">
-    <h3 class="text-2xl font-bold mb-4">Eğitim</h3>
-    <p><strong>İnönü Üniversitesi</strong> - Bilgisayar Mühendisliği (2021 - 2025)</p>
-    <p class="mt-2"><strong>Diller:</strong> English (B1)</p>
-  </section>
-
-  <!-- Tecrübeler -->
-  <section id="experience" class="container mx-auto px-6 py-10">
-    <h3 class="text-2xl font-bold mb-4">İş Tecrübelerim</h3>
-    <div class="space-y-4">
-      <div class="bg-white shadow p-4 rounded">
-        <h4 class="font-semibold">Yaz Stajı - Istanbul Teknopark (Texinsight)</h4>
-        <p class="text-sm text-gray-500">Haziran 2023 – Eylül 2023</p>
-        <p>- Görüntü İşleme ve Yapay Zeka odaklı staj, OpenCV, YOLO, EfficientNet</p>
-      </div>
-      <div class="bg-white shadow p-4 rounded">
-        <h4 class="font-semibold">NLP Proje Stajyeri - Cosmos-IT</h4>
-        <p class="text-sm text-gray-500">Temmuz 2024 – Ekim 2024</p>
-        <p>- Doğal Dil İşleme, Büyük Dil Modelleri, veri ön işleme ve model eğitimi</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Teknik Beceriler -->
-  <section id="skills" class="container mx-auto px-6 py-10 bg-white shadow rounded">
-    <h3 class="text-2xl font-bold mb-4">Teknik Beceriler</h3>
-    <ul class="grid grid-cols-2 md:grid-cols-3 gap-2 text-gray-700">
-      <li>Python (Advanced)</li>
-      <li>Dart (Intermediate)</li>
-      <li>SQL (Intermediate)</li>
-      <li>Flutter</li>
-      <li>TensorFlow, PyTorch</li>
-      <li>OpenCV, YOLO</li>
-    </ul>
-  </section>
-
-  <!-- Projeler (Placeholder) -->
+  <!-- Projeler -->
   <section id="projects" class="container mx-auto px-6 py-10">
-    <h3 class="text-2xl font-bold mb-4">Projeler</h3>
-    <p class="text-gray-500">Projeler yakında eklenecek...</p>
+    <h3 class="text-3xl font-bold mb-6 text-center">Projelerim</h3>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      
+      <!-- Proje Kartları -->
+      <div class="bg-white shadow rounded overflow-hidden hover:shadow-xl transition zoom-hover fade-in">
+        <img src="img/bebek-aglama.png" alt="Bebek Ağlama Analizi" class="w-full h-48 object-cover">
+        <div class="p-4">
+          <h4 class="text-xl font-semibold">Bebek Ağlama Analizi</h4>
+          <p class="text-gray-600 text-sm mt-2">0-2 yaş bebeklerin ağlama sesini yapay zeka ile sınıflandıran mobil uygulama.</p>
+          <p class="text-blue-600 text-xs mt-2">Flutter, Python, Firebase</p>
+        </div>
+      </div>
+
+      <div class="bg-white shadow rounded overflow-hidden hover:shadow-xl transition zoom-hover fade-in">
+        <img src="img/inme-tespiti.png" alt="Beyin İnme Tespiti" class="w-full h-48 object-cover">
+        <div class="p-4">
+          <h4 class="text-xl font-semibold">Beyin İnme Tespiti</h4>
+          <p class="text-gray-600 text-sm mt-2">MRI görüntülerinde inme tespiti ve segmentasyonu.</p>
+          <p class="text-blue-600 text-xs mt-2">MONAI, PyTorch, 3D Slicer</p>
+        </div>
+      </div>
+
+      <div class="bg-white shadow rounded overflow-hidden hover:shadow-xl transition zoom-hover fade-in">
+        <img src="img/otopark-sayac.png" alt="Otopark Sayaç Uygulaması" class="w-full h-48 object-cover">
+        <div class="p-4">
+          <h4 class="text-xl font-semibold">Otopark Sayaç Uygulaması</h4>
+          <p class="text-gray-600 text-sm mt-2">Boş park yeri tespit eden görüntü işleme uygulaması.</p>
+          <p class="text-blue-600 text-xs mt-2">Python, OpenCV, Tkinter</p>
+        </div>
+      </div>
+
+      <div class="bg-white shadow rounded overflow-hidden hover:shadow-xl transition zoom-hover fade-in">
+        <img src="img/sinir-koruma.png" alt="Sınır Koruma Projesi" class="w-full h-48 object-cover">
+        <div class="p-4">
+          <h4 class="text-xl font-semibold">Sınır Koruma Projesi</h4>
+          <p class="text-gray-600 text-sm mt-2">Belirli sınır ihlallerini tespit eden güvenlik projesi.</p>
+          <p class="text-blue-600 text-xs mt-2">YOLOv8, Python, OpenCV</p>
+        </div>
+      </div>
+
+      <div class="bg-white shadow rounded overflow-hidden hover:shadow-xl transition zoom-hover fade-in">
+        <img src="img/yorum-analizi.png" alt="Yorum Analizi" class="w-full h-48 object-cover">
+        <div class="p-4">
+          <h4 class="text-xl font-semibold">Yorum Analizi</h4>
+          <p class="text-gray-600 text-sm mt-2">Doğal dil işleme ile yorumların duygu analizi.</p>
+          <p class="text-blue-600 text-xs mt-2">Python, NLP</p>
+        </div>
+      </div>
+
+      <div class="bg-white shadow rounded overflow-hidden hover:shadow-xl transition zoom-hover fade-in">
+        <img src="img/poz-tespiti.png" alt="İnsan Poz Tespiti" class="w-full h-48 object-cover">
+        <div class="p-4">
+          <h4 class="text-xl font-semibold">İnsan Poz Tespiti</h4>
+          <p class="text-gray-600 text-sm mt-2">Mediapipe ile poz ve hareket tespiti.</p>
+          <p class="text-blue-600 text-xs mt-2">Python, Mediapipe</p>
+        </div>
+      </div>
+
+    </div>
   </section>
 
   <!-- Footer -->
   <footer id="contact" class="bg-gray-800 text-white text-center py-4 mt-10">
     <p>© 2025 Enes Yöndeş | <a href="mailto:eneserenyondes@gmail.com" class="underline">İletişim</a></p>
   </footer>
+
+  <script>
+    const faders = document.querySelectorAll('.fade-in');
+    const options = { threshold: 0.2 };
+    const observer = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, options);
+    faders.forEach(fader => observer.observe(fader));
+  </script>
 </body>
 </html>
