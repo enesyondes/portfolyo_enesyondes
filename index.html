@@ -21,10 +21,6 @@
     .zoom-hover:hover img {
       transform: scale(1.05);
     }
-    /* Modal animasyonu */
-    #imageModal img {
-      transition: transform 0.3s ease;
-    }
   </style>
 </head>
 <body class="bg-gray-100 text-gray-800 font-sans">
@@ -43,9 +39,9 @@
 
   <!-- Hero -->
   <section class="text-center py-24 bg-gray-50">
-    <img src="img/profile.jpg" alt="Enes Yöndeş" class="w-32 h-32 rounded-full mx-auto shadow">
+    <img src="img/profile.jpg" alt="Enes Yöndeş" class="w-48 h-48 rounded-full mx-auto shadow object-cover">
     <h2 class="text-3xl font-bold mt-4">Bilgisayar Mühendisi</h2>
-    <p class="text-gray-600 mt-2">Yapay Zeka & Mobil Geliştirme</p>
+    <p class="text-gray-600 mt-2">Yapay Zeka & Mobil Uygulama Geliştirme</p>
     <div class="mt-4 space-x-4">
       <a href="mailto:eneserenyondes@gmail.com" class="text-blue-600 hover:underline">Email</a>
       <a href="https://github.com/enesyondes" target="_blank" class="text-blue-600 hover:underline">GitHub</a>
@@ -56,10 +52,17 @@
   <!-- Hakkımda -->
   <section id="about" class="container mx-auto px-6 py-10 fade-in">
     <h3 class="text-2xl font-bold mb-4">Hakkımda</h3>
-    <p class="text-gray-700 leading-relaxed">
-      Ben yeni mezun olan, son derece motive ve tutkulu bir Bilgisayar Mühendisiyim. Son iki yıldır Yapay Zeka alanında kendimi geliştiriyorum.
-      Doğal Dil İşleme, Makine Öğrenmesi ve Görüntü İşleme gibi konuları içeren çeşitli projelerde aktif olarak çalıştım. Şu anda Flutter ve Python kullanarak
-      yapay zeka tabanlı mobil uygulama geliştiriyorum.
+    <p class="text-gray-700 leading-relaxed text-lg">
+      İnönü Üniversitesi Bilgisayar Mühendisliği mezunuyum. Yapay zeka ve makine öğrenmesi alanlarında çeşitli projelerde aktif rol alıyor, aynı zamanda kendi mobil uygulama projelerimi geliştiriyorum.
+    </p>
+    <ul class="list-disc list-inside text-gray-700 mt-4 space-y-1">
+      <li>✅ Mobil uygulama geliştirme</li>
+      <li>✅ Yapay zeka / makine öğrenmesi modelleri oluşturma</li>
+      <li>✅ Yazılım proje ödevleri (üniversite düzeyi)</li>
+      <li>✅ Online eğitim</li>
+    </ul>
+    <p class="text-gray-700 mt-4">
+      Ayrıca uzun süreli projelerde sözleşmeli olarak ekip içinde yer alabilirim.
     </p>
   </section>
 
@@ -106,7 +109,7 @@
   <!-- Modal -->
   <div id="imageModal" class="hidden fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50">
     <span class="absolute top-6 right-8 text-white text-4xl font-bold cursor-pointer" onclick="closeModal()">&times;</span>
-    <img id="modalImage" src="" alt="Büyük Görsel" class="max-w-4xl max-h-[90%] rounded shadow-lg">
+    <img id="modalImage" src="" alt="Büyük Görsel" class="max-w-[95%] max-h-[90vh] rounded shadow-lg object-contain">
   </div>
 
   <!-- Footer -->
@@ -131,9 +134,11 @@
     function openModal(src) {
       document.getElementById('modalImage').src = src;
       document.getElementById('imageModal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden'; // Mobilde kaydırmayı kapat
     }
     function closeModal() {
       document.getElementById('imageModal').classList.add('hidden');
+      document.body.style.overflow = ''; // Geri aç
     }
 
     // ESC ile kapatma
