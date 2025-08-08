@@ -38,7 +38,7 @@
     }
     @keyframes scroll {
       0% { transform: translateX(0); }
-      100% { transform: translateX(calc(-100% - 1.5rem)); }
+      100% { transform: translateX(-50%); }
     }
     .animate-scroll {
       animation: scroll 40s linear infinite;
@@ -710,7 +710,7 @@
       const galleryContent = track.innerHTML;
       track.innerHTML = galleryContent + galleryContent; // İçeriği iki kez kopyala
     });
-
+/*
     // Proje kartlarına hover efekti
     const projectCards = document.querySelectorAll('.project-card');
     projectCards.forEach(card => {
@@ -724,7 +724,7 @@
         card.style.boxShadow = '';
       });
     });
-
+*/
     // Navbar linkleri için smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
