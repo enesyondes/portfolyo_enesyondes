@@ -77,44 +77,145 @@
   </section>
 
   <!-- Projeler -->
-  <section id="projects" class="container mx-auto px-6 py-10">
-    <h3 class="text-3xl font-bold mb-6 text-center">Projelerim</h3>
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+<section id="projects" class="container mx-auto px-6 py-10">
+  <h3 class="text-3xl font-bold mb-6 text-center">Projelerim</h3>
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-      <!-- Görseller -->
-      <div class="bg-white shadow rounded overflow-hidden hover:shadow-xl transition zoom-hover fade-in">
-        <img src="img/proje1.png" alt="Proje 1" class="w-full object-cover cursor-pointer" onclick="openModal(this.src)">
+    <!-- Bebek Ağlama Analizi -->
+    <div class="bg-white shadow rounded overflow-hidden hover:shadow-xl transition fade-in">
+      <div class="grid grid-cols-2 gap-2 p-4">
+        <img src="img/bebek-aglama/1.jpg" onclick="openModal(this.src)" class="w-full object-cover cursor-pointer">
+        <img src="img/bebek-aglama/2.jpg" onclick="openModal(this.src)" class="w-full object-cover cursor-pointer">
+        <img src="img/bebek-aglama/3.jpg" onclick="openModal(this.src)" class="w-full object-cover cursor-pointer">
+        <img src="img/bebek-aglama/4.jpg" onclick="openModal(this.src)" class="w-full object-cover cursor-pointer">
+        <img src="img/bebek-aglama/5.jpg" onclick="openModal(this.src)" class="w-full object-cover cursor-pointer">
+        <img src="img/bebek-aglama/6.jpg" onclick="openModal(this.src)" class="w-full object-cover cursor-pointer">
+        <img src="img/bebek-aglama/7.jpg" onclick="openModal(this.src)" class="w-full object-cover cursor-pointer">
+        <img src="img/bebek-aglama/8.jpg" onclick="openModal(this.src)" class="w-full object-cover cursor-pointer">
       </div>
-      <div class="bg-white shadow rounded overflow-hidden hover:shadow-xl transition zoom-hover fade-in">
-        <img src="img/proje2.png" alt="Proje 2" class="w-full object-cover cursor-pointer" onclick="openModal(this.src)">
+      <div class="p-4">
+        <h4 class="text-xl font-bold text-gray-800">Bebek Ağlama Analizi</h4>
+        <p class="text-sm text-gray-600 mt-2">0-2 yaş arası bebeklerin ağlama seslerini yapay zeka modeli ile sınıflandıran ticari bir mobil uygulama.</p>
+        <p class="text-xs text-blue-600 mt-2">Flutter, Python, Firebase</p>
       </div>
-      <div class="bg-white shadow rounded overflow-hidden hover:shadow-xl transition zoom-hover fade-in">
-        <img src="img/proje3.png" alt="Proje 3" class="w-full object-cover cursor-pointer" onclick="openModal(this.src)">
-      </div>
-      <div class="bg-white shadow rounded overflow-hidden hover:shadow-xl transition zoom-hover fade-in">
-        <img src="img/proje4.png" alt="Proje 4" class="w-full object-cover cursor-pointer" onclick="openModal(this.src)">
-      </div>
-      <div class="bg-white shadow rounded overflow-hidden hover:shadow-xl transition zoom-hover fade-in">
-        <img src="img/proje5.png" alt="Proje 5" class="w-full object-cover cursor-pointer" onclick="openModal(this.src)">
-      </div>
-      <div class="bg-white shadow rounded overflow-hidden hover:shadow-xl transition zoom-hover fade-in">
-        <img src="img/proje6.png" alt="Proje 6" class="w-full object-cover cursor-pointer" onclick="openModal(this.src)">
-      </div>
-      <div class="bg-white shadow rounded overflow-hidden hover:shadow-xl transition zoom-hover fade-in">
-        <img src="img/proje7.png" alt="Proje 7" class="w-full object-cover cursor-pointer" onclick="openModal(this.src)">
-      </div>
-      <div class="bg-white shadow rounded overflow-hidden hover:shadow-xl transition zoom-hover fade-in">
-        <img src="img/proje8.png" alt="Proje 8" class="w-full object-cover cursor-pointer" onclick="openModal(this.src)">
-      </div>
-      <div class="bg-white shadow rounded overflow-hidden hover:shadow-xl transition zoom-hover fade-in">
-        <img src="img/proje9.png" alt="Proje 9" class="w-full object-cover cursor-pointer" onclick="openModal(this.src)">
-      </div>
-      <div class="bg-white shadow rounded overflow-hidden hover:shadow-xl transition zoom-hover fade-in">
-        <img src="img/proje10.png" alt="Proje 10" class="w-full object-cover cursor-pointer" onclick="openModal(this.src)">
-      </div>
-
     </div>
-  </section>
+
+    <!-- Yorum Analizi -->
+    <div class="bg-white shadow rounded overflow-hidden hover:shadow-xl transition fade-in">
+      <div class="grid grid-cols-2 gap-2 p-4">
+        <img src="img/yorum-analizi/1.png" onclick="openModal(this.src)" class="w-full object-cover cursor-pointer">
+        <img src="img/yorum-analizi/2.png" onclick="openModal(this.src)" class="w-full object-cover cursor-pointer">
+        <img src="img/yorum-analizi/3.png" onclick="openModal(this.src)" class="w-full object-cover cursor-pointer">
+        <img src="img/yorum-analizi/4.png" onclick="openModal(this.src)" class="w-full object-cover cursor-pointer">
+      </div>
+      <div class="p-4">
+        <h4 class="text-xl font-bold text-gray-800">Yorum Analizi – NLP</h4>
+        <p class="text-sm text-gray-600 mt-2">150.000 yorumla eğitilmiş doğal dil işleme modeli ile yorumları olumlu/olumsuz olarak sınıflandıran sistem.</p>
+        <p class="text-xs text-blue-600 mt-2">Python, NLP, Tokenization</p>
+      </div>
+    </div>
+
+    <!-- İnme Tespiti -->
+    <div class="bg-white shadow rounded overflow-hidden hover:shadow-xl transition fade-in">
+      <div class="grid grid-cols-2 gap-2 p-4">
+        <img src="img/inme-tespiti/1.png" onclick="openModal(this.src)" class="w-full object-cover cursor-pointer">
+        <img src="img/inme-tespiti/2.png" onclick="openModal(this.src)" class="w-full object-cover cursor-pointer">
+        <img src="img/inme-tespiti/3.png" onclick="openModal(this.src)" class="w-full object-cover cursor-pointer">
+        <img src="img/inme-tespiti/4.png" onclick="openModal(this.src)" class="w-full object-cover cursor-pointer">
+        <img src="img/inme-tespiti/5.png" onclick="openModal(this.src)" class="w-full object-cover cursor-pointer">
+      </div>
+      <div class="p-4">
+        <h4 class="text-xl font-bold text-gray-800">Beyin İnme Tespiti ve Segmentasyonu</h4>
+        <p class="text-sm text-gray-600 mt-2">MR görüntüleri ile inme varlığını tespit edip segmente eden Slicer eklentisi tabanlı derin öğrenme sistemi.</p>
+        <p class="text-xs text-blue-600 mt-2">MONAI, Slicer, Python, Keras</p>
+      </div>
+    </div>
+
+    <!-- Otopark Sayaç -->
+    <div class="bg-white shadow rounded overflow-hidden hover:shadow-xl transition fade-in">
+      <div class="grid grid-cols-2 gap-2 p-4">
+        <img src="img/otopark/1.png" onclick="openModal(this.src)" class="w-full object-cover cursor-pointer">
+        <img src="img/otopark/2.png" onclick="openModal(this.src)" class="w-full object-cover cursor-pointer">
+      </div>
+      <div class="p-4">
+        <h4 class="text-xl font-bold text-gray-800">Otopark Sayaç Uygulaması</h4>
+        <p class="text-sm text-gray-600 mt-2">Görüntü işleme ile boş park yeri tespit eden Python tabanlı masaüstü uygulama.</p>
+        <p class="text-xs text-blue-600 mt-2">Python, OpenCV, Tkinter</p>
+      </div>
+    </div>
+
+    <!-- Sınır Koruma -->
+    <div class="bg-white shadow rounded overflow-hidden hover:shadow-xl transition fade-in">
+      <div class="grid grid-cols-2 gap-2 p-4">
+        <img src="img/sinir-koruma/1.png" onclick="openModal(this.src)" class="w-full object-cover cursor-pointer">
+        <img src="img/sinir-koruma/2.png" onclick="openModal(this.src)" class="w-full object-cover cursor-pointer">
+        <img src="img/sinir-koruma/3.png" onclick="openModal(this.src)" class="w-full object-cover cursor-pointer">
+      </div>
+      <div class="p-4">
+        <h4 class="text-xl font-bold text-gray-800">Sınır Koruma Projesi</h4>
+        <p class="text-sm text-gray-600 mt-2">Görüntü işleme ve nesne tespiti ile belirli alanları izleyip ihlallere uyarı sistemi oluşturan proje.</p>
+        <p class="text-xs text-blue-600 mt-2">YOLOv8, OpenCV, Python</p>
+      </div>
+    </div>
+
+    <!-- Poz Tespiti -->
+    <div class="bg-white shadow rounded overflow-hidden hover:shadow-xl transition fade-in">
+      <div class="grid grid-cols-2 gap-2 p-4">
+        <img src="img/poz-tespiti/1.png" onclick="openModal(this.src)" class="w-full object-cover cursor-pointer">
+        <img src="img/poz-tespiti/2.png" onclick="openModal(this.src)" class="w-full object-cover cursor-pointer">
+        <img src="img/poz-tespiti/3.png" onclick="openModal(this.src)" class="w-full object-cover cursor-pointer">
+      </div>
+      <div class="p-4">
+        <h4 class="text-xl font-bold text-gray-800">İnsan Poz ve Hareket Tespiti</h4>
+        <p class="text-sm text-gray-600 mt-2">Mediapipe ve görüntü işleme ile insan hareketlerini algılayan deneysel bir proje.</p>
+        <p class="text-xs text-blue-600 mt-2">Python, Mediapipe, NumPy</p>
+      </div>
+    </div>
+
+    <!-- Uyku Tespiti -->
+    <div class="bg-white shadow rounded overflow-hidden hover:shadow-xl transition fade-in">
+      <div class="grid grid-cols-2 gap-2 p-4">
+        <img src="img/uyku-tespiti/1.png" onclick="openModal(this.src)" class="w-full object-cover cursor-pointer">
+      </div>
+      <div class="p-4">
+        <h4 class="text-xl font-bold text-gray-800">Uyku Tespiti</h4>
+        <p class="text-sm text-gray-600 mt-2">Sürücülerin göz, yüz ve baş hareketlerine göre uykulu olup olmadığını tespit eden sistem.</p>
+        <p class="text-xs text-blue-600 mt-2">Python, OpenCV, Facial Landmark</p>
+      </div>
+    </div>
+
+    <!-- Kütüphane Sistemi -->
+    <div class="bg-white shadow rounded overflow-hidden hover:shadow-xl transition fade-in">
+      <div class="grid grid-cols-2 gap-2 p-4">
+        <img src="img/kutuphane/1.jpg" onclick="openModal(this.src)" class="w-full object-cover cursor-pointer">
+        <img src="img/kutuphane/2.jpg" onclick="openModal(this.src)" class="w-full object-cover cursor-pointer">
+        <img src="img/kutuphane/3.jpg" onclick="openModal(this.src)" class="w-full object-cover cursor-pointer">
+      </div>
+      <div class="p-4">
+        <h4 class="text-xl font-bold text-gray-800">Kütüphane Takip Sistemi</h4>
+        <p class="text-sm text-gray-600 mt-2">Kütüphanedeki kitap, kullanıcı ve ödünç alma işlemlerini takip eden küçük çaplı bir sistem.</p>
+        <p class="text-xs text-blue-600 mt-2">Python, Tkinter, SQLite</p>
+      </div>
+    </div>
+
+    <!-- Öğrenci Veritabanı Sistemi -->
+    <div class="bg-white shadow rounded overflow-hidden hover:shadow-xl transition fade-in">
+      <div class="grid grid-cols-2 gap-2 p-4">
+        <img src="img/ogrenci-veritabani/1.jpg" onclick="openModal(this.src)" class="w-full object-cover cursor-pointer">
+        <img src="img/ogrenci-veritabani/2.jpg" onclick="openModal(this.src)" class="w-full object-cover cursor-pointer">
+        <img src="img/ogrenci-veritabani/3.jpg" onclick="openModal(this.src)" class="w-full object-cover cursor-pointer">
+      </div>
+      <div class="p-4">
+        <h4 class="text-xl font-bold text-gray-800">Öğrenci Bilgi Sistemi</h4>
+        <p class="text-sm text-gray-600 mt-2">Öğrencilerin not, devamsızlık ve genel durumlarını takip eden mini veri tabanı projesi.</p>
+        <p class="text-xs text-blue-600 mt-2">Python, SQLite, GUI</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
 
   <!-- Modal -->
   <div id="imageModal" class="hidden fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50">
