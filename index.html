@@ -762,11 +762,7 @@
       if (e.key === 'Escape') closeModal();
     });
 
-    // Sonsuz scroll için track'leri kopyala
-    document.querySelectorAll('.gallery-track').forEach(track => {
-      const cloned = track.innerHTML;
-      track.innerHTML += cloned;
-    });
+
   </script>
   <!-- Modal (Görsel büyütme) -->
   <div id="imageModal" class="hidden fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50">
