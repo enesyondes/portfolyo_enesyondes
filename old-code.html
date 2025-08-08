@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Enes Yöndeş | Portfolyo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.8s ease-in-out;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .zoom-hover img {
+      transition: transform 0.4s ease;
+    }
+    .zoom-hover:hover img {
+      transform: scale(1.05);
+    }
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-scroll {
+      animation: scroll 40s linear infinite;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans">
+
+  <!-- Navbar -->
+  <header class="bg-white shadow fixed w-full z-10">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-gray-900">Enes Yöndeş</h1>
+      <nav class="space-x-4">
+        <a href="#about" class="hover:text-blue-600">Hakkımda</a>
+        <a href="#projects" class="hover:text-blue-600">Projeler</a>
+        <a href="#contact" class="hover:text-blue-600">İletişim</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="text-center py-24 bg-gray-50">
+    <img src="img/profile.jpg" alt="Enes Yöndeş" class="w-48 h-48 rounded-full mx-auto shadow object-cover">
+    <h2 class="text-3xl font-bold mt-4">Bilgisayar Mühendisi</h2>
+    <p class="text-gray-600 mt-2">Yapay Zeka & Mobil Uygulama Geliştirme</p>
+    <div class="mt-4 space-x-4">
+      <a href="mailto:enesyondes@gmail.com" class="text-blue-600 hover:underline">Email</a>
+      <a href="https://github.com/enesyondes" target="_blank" class="text-blue-600 hover:underline">GitHub</a>
+      <a href="https://linkedin.com/in/enesyondes" target="_blank" class="text-blue-600 hover:underline">LinkedIn</a>
+    </div>
+
+    <!-- PDF İndirme Butonları -->
+    <div class="flex flex-col md:flex-row justify-center items-center gap-4 mt-6 fade-in">
+      <a href="files/son_CV.pdf" download class="bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700 transition">
+        📄 CV İndir
+      </a>
+      <a href="files/Portfolyo.pdf" download class="bg-green-600 text-white px-5 py-2 rounded hover:bg-green-700 transition">
+        📂 Portfolyo İndir
+      </a>
+    </div>
+  </section>
+
+  <!-- Hakkımda -->
+  <section id="about" class="container mx-auto px-6 py-10 fade-in">
+    <h3 class="text-2xl font-bold mb-4">Hakkımda</h3>
+    <p class="text-gray-700 leading-relaxed text-lg">
+      İnönü Üniversitesi Bilgisayar Mühendisliği mezunuyum. Yapay zeka ve makine öğrenmesi alanlarında çeşitli projelerde aktif rol alıyor, aynı zamanda kendi mobil uygulama projelerimi geliştiriyorum.
+    </p>
+    <ul class="list-disc list-inside text-gray-700 mt-4 space-y-1">
+      <li>✅ Mobil uygulama geliştirme</li>
+      <li>✅ Yapay zeka / makine öğrenmesi modelleri oluşturma</li>
+      <li>✅ Yazılım proje ödevleri (üniversite düzeyi)</li>
+      <li>✅ Online eğitim</li>
+    </ul>
+    <p class="text-gray-700 mt-4">
+      Ayrıca uzun süreli projelerde sözleşmeli olarak ekip içinde yer alabilirim.
+    </p>
+  </section>
+
+  <!-- Projeler -->
+<section id="projects" class="bg-gray-100 py-16 px-6">
+  <h2 class="text-3xl font-bold text-center mb-12">Projelerim</h2>
+  
+  <div class="mb-16">
+    <h3 class="text-2xl font-bold text-gray-900 mb-4">Bebek Ağlama Analizi</h3>
+    <div class="overflow-hidden relative">
+      <div class="flex gap-6 animate-scroll whitespace-nowrap w-max">
+        <template id="bebek-aglama-gallery">
+    
+          <img src="img/bebek-aglama/1.jpg" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
+        
+          <img src="img/bebek-aglama/2.jpg" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
+        
+          <img src="img/bebek-aglama/3.jpg" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
+        
+          <img src="img/bebek-aglama/4.jpg" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
+        
+          <img src="img/bebek-aglama/5.jpg" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
+        
+          <img src="img/bebek-aglama/6.jpg" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
+        
+          <img src="img/bebek-aglama/7.jpg" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
+        
+          <img src="img/bebek-aglama/8.jpg" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
+        
+        </template>
+        <template id="bebek-aglama-gallery-2"></template>
+      </div>
+    </div>
+    <p class="text-sm text-gray-700 mt-3">0-2 yaş arası bebeklerin ağlama seslerini yapay zeka modeli ile sınıflandıran ticari bir mobil uygulama.</p>
+    <p class="text-xs text-blue-600">Flutter, Python, Firebase</p>
+  </div>
+    
+  <div class="mb-16">
+    <h3 class="text-2xl font-bold text-gray-900 mb-4">Yorum Analizi – NLP</h3>
+    <div class="overflow-hidden relative">
+      <div class="flex gap-6 animate-scroll whitespace-nowrap w-max">
+        <template id="yorum-analizi-gallery">
+    
+          <img src="img/yorum-analizi/1.png" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
+        
+          <img src="img/yorum-analizi/2.png" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
+        
+          <img src="img/yorum-analizi/3.png" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
+        
+          <img src="img/yorum-analizi/4.png" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
+        
+        </template>
+        <template id="yorum-analizi-gallery-2"></template>
+      </div>
+    </div>
+    <p class="text-sm text-gray-700 mt-3">150.000 yorumla eğitilmiş doğal dil işleme modeli ile yorumları olumlu/olumsuz olarak sınıflandıran sistem.</p>
+    <p class="text-xs text-blue-600">Python, NLP, Tokenization</p>
+  </div>
+    
+  <div class="mb-16">
+    <h3 class="text-2xl font-bold text-gray-900 mb-4">Beyin İnme Tespiti ve Segmentasyonu</h3>
+    <div class="overflow-hidden relative">
+      <div class="flex gap-6 animate-scroll whitespace-nowrap w-max">
+        <template id="inme-tespiti-gallery">
+    
+          <img src="img/inme-tespiti/1.png" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
+        
+          <img src="img/inme-tespiti/2.png" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
+        
+          <img src="img/inme-tespiti/3.png" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
+        
+          <img src="img/inme-tespiti/4.png" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
+        
+          <img src="img/inme-tespiti/5.png" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
+        
+        </template>
+        <template id="inme-tespiti-gallery-2"></template>
+      </div>
+    </div>
+    <p class="text-sm text-gray-700 mt-3">MR görüntüleri ile inme varlığını tespit edip segmente eden Slicer eklentisi tabanlı derin öğrenme sistemi.</p>
+    <p class="text-xs text-blue-600">MONAI, Slicer, Python, Keras</p>
+  </div>
+    
+  <div class="mb-16">
+    <h3 class="text-2xl font-bold text-gray-900 mb-4">Otopark Sayaç Uygulaması</h3>
+    <div class="overflow-hidden relative">
+      <div class="flex gap-6 animate-scroll whitespace-nowrap w-max">
+        <template id="otopark-gallery">
+    
+          <img src="img/otopark/1.png" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
+        
+          <img src="img/otopark/2.png" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
+        
+        </template>
+        <template id="otopark-gallery-2"></template>
+      </div>
+    </div>
+    <p class="text-sm text-gray-700 mt-3">Görüntü işleme ile boş park yeri tespit eden Python tabanlı masaüstü uygulama.</p>
+    <p class="text-xs text-blue-600">Python, OpenCV, Tkinter</p>
+  </div>
+    
+  <div class="mb-16">
+    <h3 class="text-2xl font-bold text-gray-900 mb-4">Sınır Koruma Projesi</h3>
+    <div class="overflow-hidden relative">
+      <div class="flex gap-6 animate-scroll whitespace-nowrap w-max">
+        <template id="sinir-koruma-gallery">
+    
+          <img src="img/sinir-koruma/1.png" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
+        
+          <img src="img/sinir-koruma/2.png" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
+        
+          <img src="img/sinir-koruma/3.png" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
+        
+        </template>
+        <template id="sinir-koruma-gallery-2"></template>
+      </div>
+    </div>
+    <p class="text-sm text-gray-700 mt-3">Görüntü işleme ve nesne tespiti ile belirli alanları izleyip ihlallere uyarı sistemi oluşturan proje.</p>
+    <p class="text-xs text-blue-600">YOLOv8, OpenCV, Python</p>
+  </div>
+    
+  <div class="mb-16">
+    <h3 class="text-2xl font-bold text-gray-900 mb-4">İnsan Poz ve Hareket Tespiti</h3>
+    <div class="overflow-hidden relative">
+      <div class="flex gap-6 animate-scroll whitespace-nowrap w-max">
+        <template id="poz-tespiti-gallery">
+    
+          <img src="img/poz-tespiti/1.png" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
+        
+          <img src="img/poz-tespiti/2.png" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
+        
+          <img src="img/poz-tespiti/3.png" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
+        
+        </template>
+        <template id="poz-tespiti-gallery-2"></template>
+      </div>
+    </div>
+    <p class="text-sm text-gray-700 mt-3">Mediapipe ve görüntü işleme ile insan hareketlerini algılayan deneysel bir proje.</p>
+    <p class="text-xs text-blue-600">Python, Mediapipe, NumPy</p>
+  </div>
+    
+  <div class="mb-16">
+    <h3 class="text-2xl font-bold text-gray-900 mb-4">Uyku Tespiti</h3>
+    <div class="overflow-hidden relative">
+      <div class="flex gap-6 animate-scroll whitespace-nowrap w-max">
+        <template id="uyku-tespiti-gallery">
+    
+          <img src="img/uyku-tespiti/1.png" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
+        
+        </template>
+        <template id="uyku-tespiti-gallery-2"></template>
+      </div>
+    </div>
+    <p class="text-sm text-gray-700 mt-3">Sürücülerin göz, yüz ve baş hareketlerine göre uykulu olup olmadığını tespit eden sistem.</p>
+    <p class="text-xs text-blue-600">Python, OpenCV, Facial Landmark</p>
+  </div>
+    
+  <div class="mb-16">
+    <h3 class="text-2xl font-bold text-gray-900 mb-4">Kütüphane Takip Sistemi</h3>
+    <div class="overflow-hidden relative">
+      <div class="flex gap-6 animate-scroll whitespace-nowrap w-max">
+        <template id="kutuphane-gallery">
+    
+          <img src="img/kutuphane/1.jpg" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
+        
+          <img src="img/kutuphane/2.jpg" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
+        
+          <img src="img/kutuphane/3.jpg" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
+        
+        </template>
+        <template id="kutuphane-gallery-2"></template>
+      </div>
+    </div>
+    <p class="text-sm text-gray-700 mt-3">Kütüphanedeki kitap, kullanıcı ve ödünç alma işlemlerini takip eden küçük çaplı bir sistem.</p>
+    <p class="text-xs text-blue-600">Python, Tkinter, SQLite</p>
+  </div>
+    
+  <div class="mb-16">
+    <h3 class="text-2xl font-bold text-gray-900 mb-4">Öğrenci Bilgi Sistemi</h3>
+    <div class="overflow-hidden relative">
+      <div class="flex gap-6 animate-scroll whitespace-nowrap w-max">
+        <template id="ogrenci-veritabani-gallery">
+    
+          <img src="img/ogrenci-veritabani/1.jpg" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
+        
+          <img src="img/ogrenci-veritabani/2.jpg" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
+        
+          <img src="img/ogrenci-veritabani/3.jpg" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
+        
+        </template>
+        <template id="ogrenci-veritabani-gallery-2"></template>
+      </div>
+    </div>
+    <p class="text-sm text-gray-700 mt-3">Öğrencilerin not, devamsızlık ve genel durumlarını takip eden mini veri tabanı projesi.</p>
+    <p class="text-xs text-blue-600">Python, SQLite, GUI</p>
+  </div>
+    
+</section>
+
+  <!-- Modal -->
+  <div id="imageModal" class="hidden fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50">
+    <span class="absolute top-6 right-8 text-white text-4xl font-bold cursor-pointer" onclick="closeModal()">&times;</span>
+    <img id="modalImage" src="" alt="Büyük Görsel" class="max-w-[90%] max-h-[80vh] w-auto h-auto rounded shadow-lg object-contain">
+  </div>
+
+  <!-- Footer -->
+  <footer id="contact" class="bg-gray-800 text-white text-center py-4 mt-10">
+    <p>© 2025 Enes Yöndeş | <a href="mailto:eneserenyondes@gmail.com" class="underline">İletişim</a></p>
+  </footer>
+
+  <script>
+    // Fade-in animasyonu
+    const faders = document.querySelectorAll('.fade-in');
+    const options = { threshold: 0.2 };
+    const observer = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, options);
+    faders.forEach(fader => observer.observe(fader));
+
+    // Modal Aç/Kapat
+    function openModal(src) {
+      document.getElementById('modalImage').src = src;
+      document.getElementById('imageModal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      document.getElementById('imageModal').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    // ESC ile modal kapatma
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+    });
+
+    const gallery = document.getElementById("bebek-gallery").content;
+    const galleryClone = document.importNode(gallery, true);
+    document.getElementById("bebek-gallery-2").appendChild(galleryClone);
+  </script>
+</body>
+</html>
