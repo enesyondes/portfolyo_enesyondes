@@ -4,7 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Enes Yöndeş | Portfolyo</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#2563eb',
+            secondary: '#1e40af',
+            dark: '#1f2937',
+            light: '#f9fafb'
+          }
+        }
+      }
+    }
+  </script>
   <style>
     .fade-in {
       opacity: 0;
@@ -23,271 +38,650 @@
     }
     @keyframes scroll {
       0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+      100% { transform: translateX(calc(-100% - 1.5rem)); }
     }
     .animate-scroll {
       animation: scroll 40s linear infinite;
     }
+    .gallery-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .gallery-track {
+      display: flex;
+      gap: 1.5rem;
+      width: max-content;
+    }
+    .gallery-item {
+      flex: 0 0 auto;
+      width: 300px;
+      height: 250px;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .gallery-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+    .gallery-item::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 40%;
+      background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .gallery-item:hover::after {
+      opacity: 1;
+    }
+    .gallery-container:hover .animate-scroll {
+      animation-play-state: paused;
+    }
+    .project-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+    }
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+    }
+    .nav-link {
+      position: relative;
+      padding: 8px 0;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #2563eb;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    .hero-pattern {
+      background: radial-gradient(circle, rgba(37,99,235,0.05) 0%, rgba(255,255,255,1) 100%);
+    }
+    .skill-badge {
+      display: inline-block;
+      background: #dbeafe;
+      color: #2563eb;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      margin: 4px 4px 4px 0;
+      transition: all 0.2s ease;
+    }
+    .skill-badge:hover {
+      background: #2563eb;
+      color: white;
+      transform: translateY(-2px);
+    }
+    .section-title {
+      position: relative;
+      display: inline-block;
+      padding-bottom: 10px;
+    }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60%;
+      height: 3px;
+      background: #2563eb;
+      border-radius: 3px;
+    }
   </style>
 </head>
-<body class="bg-gray-100 text-gray-800 font-sans">
+<body class="bg-gray-50 text-gray-800 font-sans antialiased">
 
   <!-- Navbar -->
-  <header class="bg-white shadow fixed w-full z-10">
-    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-      <h1 class="text-2xl font-bold text-gray-900">Enes Yöndeş</h1>
-      <nav class="space-x-4">
-        <a href="#about" class="hover:text-blue-600">Hakkımda</a>
-        <a href="#projects" class="hover:text-blue-600">Projeler</a>
-        <a href="#contact" class="hover:text-blue-600">İletişim</a>
+  <header class="bg-white shadow-md fixed w-full z-50">
+    <div class="container mx-auto px-4 md:px-6 py-3 flex justify-between items-center">
+      <h1 class="text-xl md:text-2xl font-bold text-gray-900 flex items-center">
+        <i class="fas fa-code text-primary mr-2"></i> Enes Yöndeş
+      </h1>
+      <nav class="hidden md:flex space-x-6">
+        <a href="#about" class="nav-link font-medium hover:text-primary">Hakkımda</a>
+        <a href="#projects" class="nav-link font-medium hover:text-primary">Projeler</a>
+        <a href="#skills" class="nav-link font-medium hover:text-primary">Yetenekler</a>
+        <a href="#contact" class="nav-link font-medium hover:text-primary">İletişim</a>
       </nav>
+      <button id="mobile-menu-button" class="md:hidden text-gray-600">
+        <i class="fas fa-bars text-xl"></i>
+      </button>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white py-4 px-6 shadow-lg">
+      <div class="flex flex-col space-y-4">
+        <a href="#about" class="nav-link font-medium">Hakkımda</a>
+        <a href="#projects" class="nav-link font-medium">Projeler</a>
+        <a href="#skills" class="nav-link font-medium">Yetenekler</a>
+        <a href="#contact" class="nav-link font-medium">İletişim</a>
+      </div>
     </div>
   </header>
 
   <!-- Hero -->
-  <section class="text-center py-24 bg-gray-50">
-    <img src="img/profile.jpg" alt="Enes Yöndeş" class="w-48 h-48 rounded-full mx-auto shadow object-cover">
-    <h2 class="text-3xl font-bold mt-4">Bilgisayar Mühendisi</h2>
-    <p class="text-gray-600 mt-2">Yapay Zeka & Mobil Uygulama Geliştirme</p>
-    <div class="mt-4 space-x-4">
-      <a href="mailto:enesyondes@gmail.com" class="text-blue-600 hover:underline">Email</a>
-      <a href="https://github.com/enesyondes" target="_blank" class="text-blue-600 hover:underline">GitHub</a>
-      <a href="https://linkedin.com/in/enesyondes" target="_blank" class="text-blue-600 hover:underline">LinkedIn</a>
-    </div>
+  <section class="text-center pt-32 pb-24 hero-pattern">
+    <div class="container mx-auto px-4">
+      <div class="relative w-48 h-48 mx-auto mb-8">
+        <div class="absolute inset-0 bg-gradient-to-r from-primary to-secondary rounded-full transform rotate-45"></div>
+        <img src="img/profile.jpg" 
+             alt="Enes Yöndeş" 
+             class="w-44 h-44 rounded-full mx-auto shadow-lg object-cover relative z-10 border-4 border-white">
+      </div>
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-6">Bilgisayar Mühendisi</h2>
+      <p class="text-gray-600 mt-3 text-lg max-w-2xl mx-auto">Yapay Zeka & Mobil Uygulama Geliştirme alanında projeler üretiyor ve yenilikçi çözümler geliştiriyorum</p>
+      
+      <div class="flex justify-center space-x-4 mt-6">
+        <a href="https://github.com/enesyondes" target="_blank" class="bg-gray-800 text-white p-3 rounded-full hover:bg-black transition">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://linkedin.com/in/enesyondes" target="_blank" class="bg-blue-600 text-white p-3 rounded-full hover:bg-blue-700 transition">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a href="mailto:enesyondes@gmail.com" class="bg-red-500 text-white p-3 rounded-full hover:bg-red-600 transition">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </div>
 
-    <!-- PDF İndirme Butonları -->
-    <div class="flex flex-col md:flex-row justify-center items-center gap-4 mt-6 fade-in">
-      <a href="files/son_CV.pdf" download class="bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700 transition">
-        📄 CV İndir
-      </a>
-      <a href="files/Portfolyo.pdf" download class="bg-green-600 text-white px-5 py-2 rounded hover:bg-green-700 transition">
-        📂 Portfolyo İndir
-      </a>
+      <!-- PDF İndirme Butonları -->
+      <div class="flex flex-col md:flex-row justify-center items-center gap-4 mt-8 fade-in">
+        <a href="files/son_CV.pdf" download class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-secondary transition flex items-center shadow-md">
+          <i class="far fa-file-pdf mr-2"></i> CV İndir
+        </a>
+        <a href="files/Portfolyo.pdf" download class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition flex items-center shadow-md">
+          <i class="fas fa-briefcase mr-2"></i> Portfolyo İndir
+        </a>
+      </div>
     </div>
   </section>
 
   <!-- Hakkımda -->
-  <section id="about" class="container mx-auto px-6 py-10 fade-in">
-    <h3 class="text-2xl font-bold mb-4">Hakkımda</h3>
-    <p class="text-gray-700 leading-relaxed text-lg">
-      İnönü Üniversitesi Bilgisayar Mühendisliği mezunuyum. Yapay zeka ve makine öğrenmesi alanlarında çeşitli projelerde aktif rol alıyor, aynı zamanda kendi mobil uygulama projelerimi geliştiriyorum.
-    </p>
-    <ul class="list-disc list-inside text-gray-700 mt-4 space-y-1">
-      <li>✅ Mobil uygulama geliştirme</li>
-      <li>✅ Yapay zeka / makine öğrenmesi modelleri oluşturma</li>
-      <li>✅ Yazılım proje ödevleri (üniversite düzeyi)</li>
-      <li>✅ Online eğitim</li>
-    </ul>
-    <p class="text-gray-700 mt-4">
-      Ayrıca uzun süreli projelerde sözleşmeli olarak ekip içinde yer alabilirim.
-    </p>
+  <section id="about" class="container mx-auto px-4 md:px-6 py-16 fade-in">
+    <div class="max-w-4xl mx-auto">
+      <h3 class="text-3xl font-bold mb-8 text-center section-title">Hakkımda</h3>
+      <div class="bg-white rounded-2xl p-6 md:p-8 shadow-lg">
+        <p class="text-gray-700 leading-relaxed text-lg mb-6">
+          İnönü Üniversitesi Bilgisayar Mühendisliği mezunuyum. Yapay zeka ve makine öğrenmesi alanlarında çeşitli projelerde aktif rol alıyor, aynı zamanda kendi mobil uygulama projelerimi geliştiriyorum.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-blue-50 p-5 rounded-xl">
+            <h4 class="font-bold text-primary mb-3 flex items-center">
+              <i class="fas fa-check-circle mr-2"></i> Uzmanlık Alanlarım
+            </h4>
+            <ul class="space-y-2">
+              <li class="flex items-start">
+                <i class="fas fa-mobile-alt text-primary mt-1 mr-2"></i>
+                <span>Mobil uygulama geliştirme</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-brain text-primary mt-1 mr-2"></i>
+                <span>Yapay zeka / makine öğrenmesi modelleri oluşturma</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-laptop-code text-primary mt-1 mr-2"></i>
+                <span>Yazılım proje ödevleri (üniversite düzeyi)</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-chalkboard-teacher text-primary mt-1 mr-2"></i>
+                <span>Online eğitim ve danışmanlık</span>
+              </li>
+            </ul>
+          </div>
+          <div class="bg-indigo-50 p-5 rounded-xl">
+            <h4 class="font-bold text-indigo-700 mb-3 flex items-center">
+              <i class="fas fa-handshake mr-2"></i> İşbirliği
+            </h4>
+            <p class="text-gray-700">
+              Uzun süreli projelerde sözleşmeli olarak ekip içinde yer alabilirim. Özellikle mobil uygulama geliştirme ve yapay zeka entegrasyonu konularında işbirliğine açığım.
+            </p>
+            <div class="mt-4">
+              <a href="#contact" class="inline-flex items-center text-indigo-700 font-medium hover:underline">
+                İletişime geçin
+                <i class="fas fa-arrow-right ml-2 text-sm"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Yetenekler -->
+  <section id="skills" class="bg-gray-100 py-16 px-4 md:px-6">
+    <div class="container mx-auto">
+      <h3 class="text-3xl font-bold mb-12 text-center section-title">Yetenekler & Teknolojiler</h3>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-white p-6 rounded-xl shadow-md">
+          <div class="text-primary text-4xl mb-4">
+            <i class="fas fa-mobile-alt"></i>
+          </div>
+          <h4 class="text-xl font-bold mb-3">Mobil Geliştirme</h4>
+          <div class="flex flex-wrap">
+            <span class="skill-badge">Flutter</span>
+            <span class="skill-badge">Dart</span>
+            <span class="skill-badge">Firebase</span>
+            <span class="skill-badge">React Native</span>
+          </div>
+        </div>
+        
+        <div class="bg-white p-6 rounded-xl shadow-md">
+          <div class="text-primary text-4xl mb-4">
+            <i class="fas fa-brain"></i>
+          </div>
+          <h4 class="text-xl font-bold mb-3">Yapay Zeka</h4>
+          <div class="flex flex-wrap">
+            <span class="skill-badge">Python</span>
+            <span class="skill-badge">TensorFlow</span>
+            <span class="skill-badge">PyTorch</span>
+            <span class="skill-badge">OpenCV</span>
+            <span class="skill-badge">NLP</span>
+          </div>
+        </div>
+        
+        <div class="bg-white p-6 rounded-xl shadow-md">
+          <div class="text-primary text-4xl mb-4">
+            <i class="fas fa-laptop-code"></i>
+          </div>
+          <h4 class="text-xl font-bold mb-3">Web Geliştirme</h4>
+          <div class="flex flex-wrap">
+            <span class="skill-badge">JavaScript</span>
+            <span class="skill-badge">React</span>
+            <span class="skill-badge">HTML/CSS</span>
+            <span class="skill-badge">Node.js</span>
+            <span class="skill-badge">Tailwind CSS</span>
+          </div>
+        </div>
+        
+        <div class="bg-white p-6 rounded-xl shadow-md">
+          <div class="text-primary text-4xl mb-4">
+            <i class="fas fa-database"></i>
+          </div>
+          <h4 class="text-xl font-bold mb-3">Veritabanı & Diğer</h4>
+          <div class="flex flex-wrap">
+            <span class="skill-badge">SQL</span>
+            <span class="skill-badge">MongoDB</span>
+            <span class="skill-badge">Git</span>
+            <span class="skill-badge">Docker</span>
+            <span class="skill-badge">REST API</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- Projeler -->
-<section id="projects" class="bg-gray-100 py-16 px-6">
-  <h2 class="text-3xl font-bold text-center mb-12">Projelerim</h2>
-  
-  <div class="mb-16">
-    <h3 class="text-2xl font-bold text-gray-900 mb-4">Bebek Ağlama Analizi</h3>
-    <div class="overflow-hidden relative">
-      <div class="flex gap-6 animate-scroll whitespace-nowrap w-max">
-        <template id="bebek-aglama-gallery">
-    
-          <img src="img/bebek-aglama/1.jpg" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
-        
-          <img src="img/bebek-aglama/2.jpg" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
-        
-          <img src="img/bebek-aglama/3.jpg" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
-        
-          <img src="img/bebek-aglama/4.jpg" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
-        
-          <img src="img/bebek-aglama/5.jpg" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
-        
-          <img src="img/bebek-aglama/6.jpg" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
-        
-          <img src="img/bebek-aglama/7.jpg" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
-        
-          <img src="img/bebek-aglama/8.jpg" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
-        
-        </template>
-        <template id="bebek-aglama-gallery-2"></template>
+  <section id="projects" class="py-16 px-4 md:px-6">
+    <div class="container mx-auto">
+      <h2 class="text-3xl font-bold mb-12 text-center section-title">Projelerim</h2>
+      
+      <!-- Proje 1 -->
+      <div class="project-card mb-16">
+        <div class="p-6">
+          <div class="flex flex-col md:flex-row md:items-center justify-between mb-6">
+            <h3 class="text-2xl font-bold text-gray-900">Bebek Ağlama Analizi</h3>
+            <div class="flex mt-2 md:mt-0">
+              <span class="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">Flutter</span>
+              <span class="bg-green-100 text-green-800 text-sm font-medium px-3 py-1 rounded-full ml-2">Python</span>
+              <span class="bg-orange-100 text-orange-800 text-sm font-medium px-3 py-1 rounded-full ml-2">Firebase</span>
+            </div>
+          </div>
+          <p class="text-gray-700 mb-6">
+            0-2 yaş arası bebeklerin ağlama seslerini yapay zeka modeli ile sınıflandıran ticari bir mobil uygulama.
+          </p>
+          
+          <div class="gallery-container overflow-hidden relative rounded-lg">
+            <div class="gallery-track animate-scroll">
+              <div class="gallery-item">
+                <img src="img/bebek-aglama/1.jpg" alt="Proje görseli">
+              </div>
+              <div class="gallery-item">
+                <img src="img/bebek-aglama/2.jpg" alt="Proje görseli">
+              </div>
+              <div class="gallery-item">
+                <img src="img/bebek-aglama/3.jpg" alt="Proje görseli">
+              </div>
+              <div class="gallery-item">
+                <img src="img/bebek-aglama/4.jpg" alt="Proje görseli">
+              </div>
+              <div class="gallery-item">
+                <img src="img/bebek-aglama/5.jpg" alt="Proje görseli">
+              </div>
+              <div class="gallery-item">
+                <img src="img/bebek-aglama/6.jpg" alt="Proje görseli">
+              </div>
+              <div class="gallery-item">
+                <img src="img/bebek-aglama/7.jpg" alt="Proje görseli">
+              </div>
+              <div class="gallery-item">
+                <img src="img/bebek-aglama/8.jpg" alt="Proje görseli">
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <p class="text-sm text-gray-700 mt-3">0-2 yaş arası bebeklerin ağlama seslerini yapay zeka modeli ile sınıflandıran ticari bir mobil uygulama.</p>
-    <p class="text-xs text-blue-600">Flutter, Python, Firebase</p>
-  </div>
-    
-  <div class="mb-16">
-    <h3 class="text-2xl font-bold text-gray-900 mb-4">Yorum Analizi – NLP</h3>
-    <div class="overflow-hidden relative">
-      <div class="flex gap-6 animate-scroll whitespace-nowrap w-max">
-        <template id="yorum-analizi-gallery">
-    
-          <img src="img/yorum-analizi/1.png" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
-        
-          <img src="img/yorum-analizi/2.png" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
-        
-          <img src="img/yorum-analizi/3.png" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
-        
-          <img src="img/yorum-analizi/4.png" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
-        
-        </template>
-        <template id="yorum-analizi-gallery-2"></template>
+      
+      <!-- Proje 2 -->
+      <div class="project-card mb-16">
+        <div class="p-6">
+          <div class="flex flex-col md:flex-row md:items-center justify-between mb-6">
+            <h3 class="text-2xl font-bold text-gray-900">Yorum Analizi – NLP</h3>
+            <div class="flex mt-2 md:mt-0">
+              <span class="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">Python</span>
+              <span class="bg-purple-100 text-purple-800 text-sm font-medium px-3 py-1 rounded-full ml-2">NLP</span>
+              <span class="bg-yellow-100 text-yellow-800 text-sm font-medium px-3 py-1 rounded-full ml-2">Tokenization</span>
+            </div>
+          </div>
+          <p class="text-gray-700 mb-6">
+            150.000 yorumla eğitilmiş doğal dil işleme modeli ile yorumları olumlu/olumsuz olarak sınıflandıran sistem.
+          </p>
+          
+          <div class="gallery-container overflow-hidden relative rounded-lg">
+            <div class="gallery-track animate-scroll">
+              <div class="gallery-item">
+                <img src="img/yorum-analizi/1.png" alt="Proje görseli">
+              </div>
+              <div class="gallery-item">
+                <img src="img/yorum-analizi/2.png" alt="Proje görseli">
+              </div>
+              <div class="gallery-item">
+                <img src="img/yorum-analizi/3.png" alt="Proje görseli">
+              </div>
+              <div class="gallery-item">
+                <img src="img/yorum-analizi/4.png" alt="Proje görseli">
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <p class="text-sm text-gray-700 mt-3">150.000 yorumla eğitilmiş doğal dil işleme modeli ile yorumları olumlu/olumsuz olarak sınıflandıran sistem.</p>
-    <p class="text-xs text-blue-600">Python, NLP, Tokenization</p>
-  </div>
-    
-  <div class="mb-16">
-    <h3 class="text-2xl font-bold text-gray-900 mb-4">Beyin İnme Tespiti ve Segmentasyonu</h3>
-    <div class="overflow-hidden relative">
-      <div class="flex gap-6 animate-scroll whitespace-nowrap w-max">
-        <template id="inme-tespiti-gallery">
-    
-          <img src="img/inme-tespiti/1.png" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
-        
-          <img src="img/inme-tespiti/2.png" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
-        
-          <img src="img/inme-tespiti/3.png" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
-        
-          <img src="img/inme-tespiti/4.png" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
-        
-          <img src="img/inme-tespiti/5.png" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
-        
-        </template>
-        <template id="inme-tespiti-gallery-2"></template>
+      
+      <!-- Proje 3 -->
+      <div class="project-card mb-16">
+        <div class="p-6">
+          <div class="flex flex-col md:flex-row md:items-center justify-between mb-6">
+            <h3 class="text-2xl font-bold text-gray-900">Beyin İnme Tespiti ve Segmentasyonu</h3>
+            <div class="flex mt-2 md:mt-0">
+              <span class="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">Python</span>
+              <span class="bg-red-100 text-red-800 text-sm font-medium px-3 py-1 rounded-full ml-2">Keras</span>
+              <span class="bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full ml-2">MONAI</span>
+            </div>
+          </div>
+          <p class="text-gray-700 mb-6">
+            MR görüntüleri ile inme varlığını tespit edip segmente eden Slicer eklentisi tabanlı derin öğrenme sistemi.
+          </p>
+          
+          <div class="gallery-container overflow-hidden relative rounded-lg">
+            <div class="gallery-track animate-scroll">
+              <div class="gallery-item">
+                <img src="img/inme-tespiti/1.png" alt="Proje görseli">
+              </div>
+              <div class="gallery-item">
+                <img src="img/inme-tespiti/2.png" alt="Proje görseli">
+              </div>
+              <div class="gallery-item">
+                <img src="img/inme-tespiti/3.png" alt="Proje görseli">
+              </div>
+              <div class="gallery-item">
+                <img src="img/inme-tespiti/4.png" alt="Proje görseli">
+              </div>
+              <div class="gallery-item">
+                <img src="img/inme-tespiti/5.png" alt="Proje görseli">
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <p class="text-sm text-gray-700 mt-3">MR görüntüleri ile inme varlığını tespit edip segmente eden Slicer eklentisi tabanlı derin öğrenme sistemi.</p>
-    <p class="text-xs text-blue-600">MONAI, Slicer, Python, Keras</p>
-  </div>
-    
-  <div class="mb-16">
-    <h3 class="text-2xl font-bold text-gray-900 mb-4">Otopark Sayaç Uygulaması</h3>
-    <div class="overflow-hidden relative">
-      <div class="flex gap-6 animate-scroll whitespace-nowrap w-max">
-        <template id="otopark-gallery">
-    
-          <img src="img/otopark/1.png" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
-        
-          <img src="img/otopark/2.png" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
-        
-        </template>
-        <template id="otopark-gallery-2"></template>
+      <!-- Proje 4 -->
+      <div class="project-card mb-16">
+        <div class="p-6">
+          <div class="flex flex-col md:flex-row md:items-center justify-between mb-6">
+            <h3 class="text-2xl font-bold text-gray-900">Otopark Sayaç Uygulaması</h3>
+            <div class="flex mt-2 md:mt-0">
+              <span class="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">Python</span>
+              <span class="bg-purple-100 text-purple-800 text-sm font-medium px-3 py-1 rounded-full ml-2">OpenCV</span>
+              <span class="bg-green-100 text-green-800 text-sm font-medium px-3 py-1 rounded-full ml-2">Tkinter</span>
+            </div>
+          </div>
+          <p class="text-gray-700 mb-6">
+            Görüntü işleme ile boş park yeri tespit eden Python tabanlı masaüstü uygulama.
+          </p>
+          <div class="gallery-container overflow-hidden relative rounded-lg">
+            <div class="gallery-track animate-scroll">
+              <div class="gallery-item"><img src="img/otopark/1.png" alt="Proje görseli"></div>
+              <div class="gallery-item"><img src="img/otopark/2.png" alt="Proje görseli"></div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <p class="text-sm text-gray-700 mt-3">Görüntü işleme ile boş park yeri tespit eden Python tabanlı masaüstü uygulama.</p>
-    <p class="text-xs text-blue-600">Python, OpenCV, Tkinter</p>
-  </div>
-    
-  <div class="mb-16">
-    <h3 class="text-2xl font-bold text-gray-900 mb-4">Sınır Koruma Projesi</h3>
-    <div class="overflow-hidden relative">
-      <div class="flex gap-6 animate-scroll whitespace-nowrap w-max">
-        <template id="sinir-koruma-gallery">
-    
-          <img src="img/sinir-koruma/1.png" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
-        
-          <img src="img/sinir-koruma/2.png" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
-        
-          <img src="img/sinir-koruma/3.png" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
-        
-        </template>
-        <template id="sinir-koruma-gallery-2"></template>
-      </div>
-    </div>
-    <p class="text-sm text-gray-700 mt-3">Görüntü işleme ve nesne tespiti ile belirli alanları izleyip ihlallere uyarı sistemi oluşturan proje.</p>
-    <p class="text-xs text-blue-600">YOLOv8, OpenCV, Python</p>
-  </div>
-    
-  <div class="mb-16">
-    <h3 class="text-2xl font-bold text-gray-900 mb-4">İnsan Poz ve Hareket Tespiti</h3>
-    <div class="overflow-hidden relative">
-      <div class="flex gap-6 animate-scroll whitespace-nowrap w-max">
-        <template id="poz-tespiti-gallery">
-    
-          <img src="img/poz-tespiti/1.png" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
-        
-          <img src="img/poz-tespiti/2.png" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
-        
-          <img src="img/poz-tespiti/3.png" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
-        
-        </template>
-        <template id="poz-tespiti-gallery-2"></template>
-      </div>
-    </div>
-    <p class="text-sm text-gray-700 mt-3">Mediapipe ve görüntü işleme ile insan hareketlerini algılayan deneysel bir proje.</p>
-    <p class="text-xs text-blue-600">Python, Mediapipe, NumPy</p>
-  </div>
-    
-  <div class="mb-16">
-    <h3 class="text-2xl font-bold text-gray-900 mb-4">Uyku Tespiti</h3>
-    <div class="overflow-hidden relative">
-      <div class="flex gap-6 animate-scroll whitespace-nowrap w-max">
-        <template id="uyku-tespiti-gallery">
-    
-          <img src="img/uyku-tespiti/1.png" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
-        
-        </template>
-        <template id="uyku-tespiti-gallery-2"></template>
-      </div>
-    </div>
-    <p class="text-sm text-gray-700 mt-3">Sürücülerin göz, yüz ve baş hareketlerine göre uykulu olup olmadığını tespit eden sistem.</p>
-    <p class="text-xs text-blue-600">Python, OpenCV, Facial Landmark</p>
-  </div>
-    
-  <div class="mb-16">
-    <h3 class="text-2xl font-bold text-gray-900 mb-4">Kütüphane Takip Sistemi</h3>
-    <div class="overflow-hidden relative">
-      <div class="flex gap-6 animate-scroll whitespace-nowrap w-max">
-        <template id="kutuphane-gallery">
-    
-          <img src="img/kutuphane/1.jpg" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
-        
-          <img src="img/kutuphane/2.jpg" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
-        
-          <img src="img/kutuphane/3.jpg" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
-        
-        </template>
-        <template id="kutuphane-gallery-2"></template>
-      </div>
-    </div>
-    <p class="text-sm text-gray-700 mt-3">Kütüphanedeki kitap, kullanıcı ve ödünç alma işlemlerini takip eden küçük çaplı bir sistem.</p>
-    <p class="text-xs text-blue-600">Python, Tkinter, SQLite</p>
-  </div>
-    
-  <div class="mb-16">
-    <h3 class="text-2xl font-bold text-gray-900 mb-4">Öğrenci Bilgi Sistemi</h3>
-    <div class="overflow-hidden relative">
-      <div class="flex gap-6 animate-scroll whitespace-nowrap w-max">
-        <template id="ogrenci-veritabani-gallery">
-    
-          <img src="img/ogrenci-veritabani/1.jpg" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
-        
-          <img src="img/ogrenci-veritabani/2.jpg" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
-        
-          <img src="img/ogrenci-veritabani/3.jpg" class="h-60 md:h-72 object-cover rounded shadow-md cursor-pointer" onclick="openModal(this.src)">
-        
-        </template>
-        <template id="ogrenci-veritabani-gallery-2"></template>
-      </div>
-    </div>
-    <p class="text-sm text-gray-700 mt-3">Öğrencilerin not, devamsızlık ve genel durumlarını takip eden mini veri tabanı projesi.</p>
-    <p class="text-xs text-blue-600">Python, SQLite, GUI</p>
-  </div>
-    
-</section>
 
-  <!-- Modal -->
-  <div id="imageModal" class="hidden fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50">
-    <span class="absolute top-6 right-8 text-white text-4xl font-bold cursor-pointer" onclick="closeModal()">&times;</span>
-    <img id="modalImage" src="" alt="Büyük Görsel" class="max-w-[90%] max-h-[80vh] w-auto h-auto rounded shadow-lg object-contain">
-  </div>
+      <!-- Proje 5 -->
+      <div class="project-card mb-16">
+        <div class="p-6">
+          <div class="flex flex-col md:flex-row md:items-center justify-between mb-6">
+            <h3 class="text-2xl font-bold text-gray-900">Sınır Koruma Projesi</h3>
+            <div class="flex mt-2 md:mt-0">
+              <span class="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">Python</span>
+              <span class="bg-orange-100 text-orange-800 text-sm font-medium px-3 py-1 rounded-full ml-2">YOLOv8</span>
+              <span class="bg-purple-100 text-purple-800 text-sm font-medium px-3 py-1 rounded-full ml-2">OpenCV</span>
+            </div>
+          </div>
+          <p class="text-gray-700 mb-6">
+            Görüntü işleme ve nesne tespiti ile belirli alanları izleyip ihlallere uyarı sistemi oluşturan proje.
+          </p>
+          <div class="gallery-container overflow-hidden relative rounded-lg">
+            <div class="gallery-track animate-scroll">
+              <div class="gallery-item"><img src="img/sinir-koruma/1.png" alt="Proje görseli"></div>
+              <div class="gallery-item"><img src="img/sinir-koruma/2.png" alt="Proje görseli"></div>
+              <div class="gallery-item"><img src="img/sinir-koruma/3.png" alt="Proje görseli"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Proje 6 -->
+      <div class="project-card mb-16">
+        <div class="p-6">
+          <div class="flex flex-col md:flex-row md:items-center justify-between mb-6">
+            <h3 class="text-2xl font-bold text-gray-900">İnsan Poz ve Hareket Tespiti</h3>
+            <div class="flex mt-2 md:mt-0">
+              <span class="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">Python</span>
+              <span class="bg-pink-100 text-pink-800 text-sm font-medium px-3 py-1 rounded-full ml-2">Mediapipe</span>
+              <span class="bg-gray-100 text-gray-800 text-sm font-medium px-3 py-1 rounded-full ml-2">NumPy</span>
+            </div>
+          </div>
+          <p class="text-gray-700 mb-6">
+            Mediapipe ve görüntü işleme ile insan hareketlerini algılayan deneysel bir proje.
+          </p>
+          <div class="gallery-container overflow-hidden relative rounded-lg">
+            <div class="gallery-track animate-scroll">
+              <div class="gallery-item"><img src="img/poz-tespiti/1.png" alt="Proje görseli"></div>
+              <div class="gallery-item"><img src="img/poz-tespiti/2.png" alt="Proje görseli"></div>
+              <div class="gallery-item"><img src="img/poz-tespiti/3.png" alt="Proje görseli"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Proje 7 -->
+      <div class="project-card mb-16">
+        <div class="p-6">
+          <div class="flex flex-col md:flex-row md:items-center justify-between mb-6">
+            <h3 class="text-2xl font-bold text-gray-900">Uyku Tespiti</h3>
+            <div class="flex mt-2 md:mt-0">
+              <span class="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">Python</span>
+              <span class="bg-purple-100 text-purple-800 text-sm font-medium px-3 py-1 rounded-full ml-2">OpenCV</span>
+              <span class="bg-yellow-100 text-yellow-800 text-sm font-medium px-3 py-1 rounded-full ml-2">Facial Landmark</span>
+            </div>
+          </div>
+          <p class="text-gray-700 mb-6">
+            Sürücülerin göz, yüz ve baş hareketlerine göre uykulu olup olmadığını tespit eden sistem.
+          </p>
+          <div class="gallery-container overflow-hidden relative rounded-lg">
+            <div class="gallery-track animate-scroll">
+              <div class="gallery-item"><img src="img/uyku-tespiti/1.png" alt="Proje görseli"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Proje 8 -->
+      <div class="project-card mb-16">
+        <div class="p-6">
+          <div class="flex flex-col md:flex-row md:items-center justify-between mb-6">
+            <h3 class="text-2xl font-bold text-gray-900">Kütüphane Takip Sistemi</h3>
+            <div class="flex mt-2 md:mt-0">
+              <span class="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">Python</span>
+              <span class="bg-green-100 text-green-800 text-sm font-medium px-3 py-1 rounded-full ml-2">Tkinter</span>
+              <span class="bg-purple-100 text-purple-800 text-sm font-medium px-3 py-1 rounded-full ml-2">SQLite</span>
+            </div>
+          </div>
+          <p class="text-gray-700 mb-6">
+            Kütüphanedeki kitap, kullanıcı ve ödünç alma işlemlerini takip eden küçük çaplı bir sistem.
+          </p>
+          <div class="gallery-container overflow-hidden relative rounded-lg">
+            <div class="gallery-track animate-scroll">
+              <div class="gallery-item"><img src="img/kutuphane/1.jpg" alt="Proje görseli"></div>
+              <div class="gallery-item"><img src="img/kutuphane/2.jpg" alt="Proje görseli"></div>
+              <div class="gallery-item"><img src="img/kutuphane/3.jpg" alt="Proje görseli"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Proje 9 -->
+      <div class="project-card mb-16">
+        <div class="p-6">
+          <div class="flex flex-col md:flex-row md:items-center justify-between mb-6">
+            <h3 class="text-2xl font-bold text-gray-900">Öğrenci Bilgi Sistemi</h3>
+            <div class="flex mt-2 md:mt-0">
+              <span class="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">Python</span>
+              <span class="bg-purple-100 text-purple-800 text-sm font-medium px-3 py-1 rounded-full ml-2">SQLite</span>
+              <span class="bg-green-100 text-green-800 text-sm font-medium px-3 py-1 rounded-full ml-2">GUI</span>
+            </div>
+          </div>
+          <p class="text-gray-700 mb-6">
+            Öğrencilerin not, devamsızlık ve genel durumlarını takip eden mini veri tabanı projesi.
+          </p>
+          <div class="gallery-container overflow-hidden relative rounded-lg">
+            <div class="gallery-track animate-scroll">
+              <div class="gallery-item"><img src="img/ogrenci-veritabani/1.jpg" alt="Proje görseli"></div>
+              <div class="gallery-item"><img src="img/ogrenci-veritabani/2.jpg" alt="Proje görseli"></div>
+              <div class="gallery-item"><img src="img/ogrenci-veritabani/3.jpg" alt="Proje görseli"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- İletişim -->
+  <section id="contact" class="py-16 px-4 md:px-6 bg-gray-100">
+    <div class="container mx-auto max-w-4xl">
+      <h3 class="text-3xl font-bold mb-12 text-center section-title">İletişim</h3>
+      
+      <div class="bg-white rounded-2xl p-6 md:p-8 shadow-lg">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <h4 class="text-xl font-bold mb-4 text-primary">Bana Ulaşın</h4>
+            <p class="text-gray-700 mb-6">
+              Yeni projeler, işbirliği teklifleri veya sorularınız için benimle iletişime geçebilirsiniz.
+            </p>
+            
+            <div class="space-y-4">
+              <div class="flex items-start">
+                <div class="bg-primary bg-opacity-10 p-3 rounded-full mr-4">
+                  <i class="fas fa-envelope text-primary text-lg"></i>
+                </div>
+                <div>
+                  <h5 class="font-bold text-gray-900">E-posta</h5>
+                  <a href="mailto:enesyondes@gmail.com" class="text-gray-600 hover:text-primary">enesyondes@gmail.com</a>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <div class="bg-primary bg-opacity-10 p-3 rounded-full mr-4">
+                  <i class="fab fa-linkedin-in text-primary text-lg"></i>
+                </div>
+                <div>
+                  <h5 class="font-bold text-gray-900">LinkedIn</h5>
+                  <a href="https://linkedin.com/in/enesyondes" target="_blank" class="text-gray-600 hover:text-primary">linkedin.com/in/enesyondes</a>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <div class="bg-primary bg-opacity-10 p-3 rounded-full mr-4">
+                  <i class="fab fa-github text-primary text-lg"></i>
+                </div>
+                <div>
+                  <h5 class="font-bold text-gray-900">GitHub</h5>
+                  <a href="https://github.com/enesyondes" target="_blank" class="text-gray-600 hover:text-primary">github.com/enesyondes</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <h4 class="text-xl font-bold mb-4 text-primary">Mesaj Gönderin</h4>
+            <form class="space-y-4">
+              <div>
+                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Adınız</label>
+                <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary">
+              </div>
+              
+              <div>
+                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">E-posta</label>
+                <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary">
+              </div>
+              
+              <div>
+                <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Mesajınız</label>
+                <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"></textarea>
+              </div>
+              
+              <button type="submit" class="w-full bg-primary text-white py-3 rounded-lg font-medium hover:bg-secondary transition">
+                Mesajı Gönder
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Footer -->
-  <footer id="contact" class="bg-gray-800 text-white text-center py-4 mt-10">
-    <p>© 2025 Enes Yöndeş | <a href="mailto:eneserenyondes@gmail.com" class="underline">İletişim</a></p>
+  <footer class="bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-4 text-center">
+      <p class="mb-2">© 2025 Enes Yöndeş | Tüm Hakları Saklıdır</p>
+      <p class="text-gray-400 text-sm">Bilgisayar Mühendisi | Yapay Zeka & Mobil Uygulama Geliştirici</p>
+    </div>
   </footer>
 
   <script>
@@ -303,27 +697,54 @@
     }, options);
     faders.forEach(fader => observer.observe(fader));
 
-    // Modal Aç/Kapat
-    function openModal(src) {
-      document.getElementById('modalImage').src = src;
-      document.getElementById('imageModal').classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeModal() {
-      document.getElementById('imageModal').classList.add('hidden');
-      document.body.style.overflow = '';
-    }
-
-    // ESC ile modal kapatma
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        closeModal();
-      }
+    // Mobil menü
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
     });
 
-    const gallery = document.getElementById("bebek-gallery").content;
-    const galleryClone = document.importNode(gallery, true);
-    document.getElementById("bebek-gallery-2").appendChild(galleryClone);
+    // Kaydırma animasyonu için galeri içeriğini kopyalama
+    document.querySelectorAll('.gallery-track').forEach(track => {
+      const galleryContent = track.innerHTML;
+      track.innerHTML = galleryContent + galleryContent; // İçeriği iki kez kopyala
+    });
+
+    // Proje kartlarına hover efekti
+    const projectCards = document.querySelectorAll('.project-card');
+    projectCards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.style.transform = 'translateY(-8px)';
+        card.style.boxShadow = '0 12px 25px rgba(0,0,0,0.15)';
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+        card.style.boxShadow = '';
+      });
+    });
+
+    // Navbar linkleri için smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+          
+          // Mobil menüyü kapat
+          mobileMenu.classList.add('hidden');
+        }
+      });
+    });
   </script>
 </body>
 </html>
